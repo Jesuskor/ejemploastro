@@ -13,18 +13,6 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        '@': '/src',
-        '@components': '/src/components',
-        '@layouts': '/src/layouts',
-        '@pages': '/src/pages',
-        '@assets': '/src/assets',
-        '@styles': '/src/styles',
-        '@utils': '/src/utils',
-        '@hooks': '/src/hooks'
-      }
-    }
   },
 
   integrations: [vue(), db()],
