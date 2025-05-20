@@ -1,11 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import DataComponent from '../components/DataComponent.vue';
+import Layout from '@layouts/Layout.astro';
+import DataComponent from '@components/DataComponent.vue';
 ---
 
 <Layout>
 	<section class="h-svh flex flex-col items-center justify-center">
-		<p class="text-3xl font-semibold">Cargando...</p>
+		<p class="text-3xl font-semibold animate-pulse">Cargando...</p>
 		<DataComponent client:load />
 	</section>
 </Layout>

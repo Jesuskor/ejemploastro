@@ -64,7 +64,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-4 hidden">
     <h2 class="text-xl font-bold mb-4">Información de tu IP</h2>
 
     <div v-if="loading">Cargando información...</div>
