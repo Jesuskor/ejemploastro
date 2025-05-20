@@ -16,5 +16,6 @@ export default defineConfig({
   },
 
   integrations: [vue(), db()],
+  output: 'server',
   adapter: vercel()
 });
