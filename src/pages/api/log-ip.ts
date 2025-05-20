@@ -1,31 +1,34 @@
+// src/pages/api/log-ip.ts
+import type { APIRoute } from 'astro';
+import { db } from '@/lib/db';
+import { ipLogs } from '@/lib/schema';
+import { randomUUID } from 'crypto';
+
 export const prerender = false;
 
-import type { APIRoute } from 'astro';
-import { db, Iplog } from 'astro:db';
-
 export const POST: APIRoute = async ({ request }) => {
-    let body;
-    try {
-        body = await request.json();
-    } catch {
-        return new Response(JSON.stringify({ success: false, error: 'JSON inválido' }), { status: 400 });
-    }
-
+    const body = await request.json();
     const { ip, pais, region, ciudad, latitud, longitud, zona } = body || {};
 
     if (!ip) {
         return new Response(JSON.stringify({ success: false, error: 'Faltan datos' }), { status: 400 });
     }
 
-    await db.insert(Iplog).values({
-        ip,
-        pais,
-        region,
-        ciudad,
-        latitud,
-        longitud,
-        zona,
-    });
+    try {
+        await db.insert(ipLogs).values({
+            id: randomUUID(),
+            ip,
+            pais,
+            region,
+            ciudad,
+            latitud,
+            longitud,
+            zona,
+        });
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
+        return new Response(JSON.stringify({ success: true }), { status: 200 });
+    } catch (err) {
+        console.error(err);
+        return new Response(JSON.stringify({ success: false, error: 'Error al insertar' }), { status: 500 });
+    }
 };
